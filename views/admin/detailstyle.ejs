@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/headerlink'); %>
+    <title>PPI Compact Dashboard</title>
+</head>
+
+<style>
+    #sukses-alert {
+        display: none;
+    }
+
+    .btn-right {
+        float: right;
+        right: 0;
+        padding: 9px 16px
+    }
+
+    .btn-right a {
+        width: 60px;
+        height: 23px;
+        padding: 5px;
+        font-size: 10px;
+        color: white;
+    }
+
+    .btn-notif {
+        font-size: 10px;
+        padding: 5px;
+    }
+
+    .btn-notif span {
+        font-size: 10px;
+
+    }
+
+    #add_group a {
+        cursor: pointer;
+    }
+
+    #map {
+        width: 100%;
+        height: 400px;
+    }
+
+    .table-fixed {
+        table-layout: fixed !important;
+    }
+
+    td {
+        border: 1px solid #000;
+    }
+
+    tr td:last-child {
+        width: 1%;
+        white-space: nowrap;
+    }
+
+    .mr {
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+        <!-- ============================================================== -->
+        <!-- navbar -->
+        <!-- ============================================================== -->
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <a class="navbar-brand" href="../index.html">Concept</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto navbar-right-top">
+                        <li class="nav-item">
+                            <div id="custom-search" class="top-search-bar">
+                                <input class="form-control" type="text" placeholder="Search..">
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown notification">
+                            <a class="nav-link nav-icons" href="#" id="navbarDropdownMenuLink1" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="fas fa-fw fa-bell"></i> <span
+                                    class="indicator"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
+                                <li>
+                                    <div class="notification-title"> Notification</div>
+                                    <div class="notification-list">
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action active">
+                                                <div class="notification-info">
+                                                    <div class="notification-list-user-img"><img
+                                                            src="../assets/images/avatar-2.jpg" alt=""
+                                                            class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-block"><span
+                                                            class="notification-list-user-name">Jeremy
+                                                            Rakestraw</span>accepted your invitation to join the team.
+                                                        <div class="notification-date">2 min ago</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="notification-info">
+                                                    <div class="notification-list-user-img"><img
+                                                            src="../assets/images/avatar-3.jpg" alt=""
+                                                            class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-block"><span
+                                                            class="notification-list-user-name">
+                                                            John Abraham</span>is now following you
+                                                        <div class="notification-date">2 days ago</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="notification-info">
+                                                    <div class="notification-list-user-img"><img
+                                                            src="../assets/images/avatar-4.jpg" alt=""
+                                                            class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-block"><span
+                                                            class="notification-list-user-name">Monaan Pechi</span> is
+                                                        watching your main repository
+                                                        <div class="notification-date">2 min ago</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action">
+                                                <div class="notification-info">
+                                                    <div class="notification-list-user-img"><img
+                                                            src="../assets/images/avatar-5.jpg" alt=""
+                                                            class="user-avatar-md rounded-circle"></div>
+                                                    <div class="notification-list-user-block"><span
+                                                            class="notification-list-user-name">Jessica
+                                                            Caruso</span>accepted your invitation to join the team.
+                                                        <div class="notification-date">2 min ago</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="list-footer"> <a href="#">View all notifications</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown connection">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"> <i class="fas fa-fw fa-th"></i> </a>
+                            <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                                <li class="connection-list">
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"><img src="../assets/images/github.png"
+                                                    alt=""> <span>Github</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"><img src="../assets/images/dribbble.png"
+                                                    alt=""> <span>Dribbble</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"><img src="../assets/images/dropbox.png"
+                                                    alt=""> <span>Dropbox</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"><img
+                                                    src="../assets/images/bitbucket.png" alt="">
+                                                <span>Bitbucket</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"><img
+                                                    src="../assets/images/mail_chimp.png" alt=""><span>Mail
+                                                    chimp</span></a>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                            <a href="#" class="connection-item"><img src="../assets/images/slack.png"
+                                                    alt=""> <span>Slack</span></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="conntection-footer"><a href="#">More</a></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown nav-user">
+                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                    src="../assets/images/avatar-1.jpg" alt=""
+                                    class="user-avatar-md rounded-circle"></a>
+                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+                                aria-labelledby="navbarDropdownMenuLink2">
+                                <div class="nav-user-info">
+                                    <h5 class="mb-0 text-white nav-user-name">
+                                        John Abraham</h5>
+                                    <span class="status"></span><span class="ml-2">Available</span>
+                                </div>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-power-off mr-2"></i>Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end navbar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        <%- include('./partials/sidebar'); %>
+        <!-- ============================================================== -->
+        <!-- end left sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- wrapper  -->
+        <!-- ============================================================== -->
+        <div class="dashboard-wrapper">
+            <div class="container-fluid dashboard-content">
+                <!-- ============================================================== -->
+                <!-- pageheader -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title"><%= title %></h2>
+
+                            <div class="page-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a>
+                                        </li>
+                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">UI Elements</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Accordions</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- end pageheader -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- accrodions -->
+                <!-- ============================================================== -->
+                <div id="sukses-alert" class="alert alert-primary" role="alert">
+                    Success
+                </div>
+                <div class="row">
+                    <!-- ============================================================== -->
+                    <!-- accrodions style one -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="tab-regular">
+                            <ul class="nav nav-tabs " id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#single-style"
+                                        role="tab" aria-controls="single-style" aria-selected="true">Single</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a onclick="getProperties()" class="nav-link" id="profile-tab" data-toggle="tab"
+                                        href="#Kategorisasi-style" role="tab" aria-controls="Kategorisasi-style"
+                                        aria-selected="false">Kategorisasi</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="single-style" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                    <div id="single-style-prop" class="form-group">
+                                        <label for="fill-color" class="col-form-label">Fill Color</label>
+                                        <input id="fill-color" type="color" name="fill-color" class="form-control"
+                                            style="height: 40px;" value="#6B70FF">
+
+                                        <label for="line-color" class="col-form-label">Line Color</label>
+                                        <input id="line-color" type="color" name="line-color" class="form-control"
+                                            style="height: 40px;" value="#333AFF">
+
+                                        <label for="weight" class="col-form-label">Weigth</label>
+                                        <input id="weight" type="number" name="weight" class="form-control" value=2>
+
+                                        <label for="opacity" class="col-form-label">Opacity</label>
+                                        <input id="opacity" type="number" name="opacity" class="form-control" value=1>
+
+                                        <label for="fill-opacity" class="col-form-label">Fill Opacity</label>
+                                        <input id="fill-opacity" type="number" name="fill-opacity" class="form-control"
+                                            value=0.5>
+
+
+                                            <br>
+                                        <button onclick="previewColor()" class="btn btn-secondary mr">Preview</a>
+                                            <button onclick="insertStyle()" class="btn btn-success">Submit</a>
+                                    </div>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="Kategorisasi-style" role="tabpanel"
+                                    aria-labelledby="profile-tab">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend be-addon">
+                                            <button tabindex="-1" type="button" class="btn btn-secondary">Pilih
+                                                Properti</button>
+                                            <button tabindex="-1" data-toggle="dropdown" type="button"
+                                                class="btn btn-secondary dropdown-toggle dropdown-toggle-split"><span
+                                                    class="sr-only">Toggle Dropdown</span></button>
+
+                                            <div id="list-properti" class="dropdown-menu">
+
+                                            </div>
+
+                                        </div>
+                                        <input id="prop_used" type="text" class="form-control">
+                                    </div>
+                                    <div id="table-responsive" class="table-responsive">
+
+                                    </div>
+                                    <br>
+                                    <button onclick="previewColorKategori()" class="btn btn-secondary mr">Preview</a>
+                                        <button onclick="insertKategoriStyle()" class="btn btn-success">Submit</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end accrodions style one -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- accrodions style two -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="section-block">
+                            <h5 class="section-title">Preview Data</h5>
+                            <p>Preview data GeoJSON yang akan di-telah ke database.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-body" style="padding:0px">
+                                <div id='map'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper -->
+    <!-- ============================================================== -->
+
+    <%- include('./partials/footerlink'); %>
+
+    <script>
+        let geojson = JSON.parse('<%- JSON.stringify(geojson) %>')
+        let geojson_prop = geojson.features[0].properties
+
+        let prop_val = geojson.features.map(geojson => {
+            return geojson.properties
+        })
+
+        const map = L.map('map').setView([39.74739, -105], 13);
+
+        L.tileLayer(
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                maxZoom: 18,
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox/light-v9',
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(map);
+
+        // Read selected geojson
+        let def_geo = L.geoJSON(geojson)
+
+        def_geo.addTo(map)
+        map.fitBounds(def_geo.getBounds())
+
+        // Single style
+        function previewColor() {
+            let input = document.querySelectorAll('#single-style-prop input')
+            let default_prop = ['fillColor', 'color', 'weight', 'opacity', 'fillOpacity']
+
+            let style = getSingleStyle(default_prop,input)
+
+            def_geo.setStyle(style)
+        }
+
+        function getSingleStyle(arr, input) {
+            let obj = {}
+            for(let i in arr) {
+                obj[arr[i]] = input[i].value
+            }
+            return obj
+        }
+
+        let list_location = document.getElementById('list-properti')
+        // Kategorisasi
+        async function getProperties() {
+            let props = await Object.keys(prop_val[0])
+
+            let prop_list = props.map(prop => {
+                return `<a onclick="useProp(this)" class="dropdown-item">${prop}</a>`
+            })
+            list_location.innerHTML = prop_list.join("")
+        }
+
+        list_location.addEventListener('change', function (a) {
+            document.getElementById('prop_used').value = a
+        })
+
+        function onlyUnique(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+
+        // Create table from geojson
+        let table = document.createElement('table')
+        table.id = 'tbodyid'
+        table.className = "table table-striped table-bordered first table-fixed"
+
+        async function useProp(text) {
+
+            document.getElementById('prop_used').value = text.innerHTML
+
+            let data = await prop_val.map(a => {
+                return a[text.innerHTML]
+            }).filter(onlyUnique)
+
+            await createTable(data)
+
+        }
+
+        function previewColorKategori() {
+            def_geo.setStyle(kat_style)
+        }
+
+        function kat_style(feature) {
+            let val = document.getElementById('prop_used').value
+
+            return setKategoriColor(feature.properties[val])
+
+        }
+
+        function setKategoriColor(prop) {
+            let table = document.getElementById('tbodyid')
+            let obj = getTableValue(table)
+
+            let temp = transFormObject(obj)
+
+            let new_key = Object.keys(temp)
+
+            for (let i in new_key) {
+                switch (prop) {
+                    case new_key[i]:
+                        return temp[new_key[i]];
+                        break
+                }
+            }
+        }
+
+        function transFormObject(raw_obj) {
+            let temp = {}
+
+            for (let i in raw_obj) {
+                let key = Object.keys(raw_obj[i])
+                temp[key] = raw_obj[i][key]
+            }
+            return temp
+        }
+
+        let createTable = async (value_array) => {
+
+            await $("#tbodyid").empty();
+
+            let def_style = ['kategori', 'fillColor', 'color', 'weight', 'opacity', 'fillOpacity']
+            // Head table section
+            let head = def_style.map((head, i) => {
+                return `<th>${head}</th>`
+            })
+
+            let head_table = document.createElement('thead')
+            let head_row = document.createElement('tr')
+
+            head_row.innerHTML = head.join("")
+            head_table.appendChild(head_row)
+            table.appendChild(head_table)
+
+            // Row and column table section
+            for (let i = 0; i < value_array.length; i++) {
+                let row = document.createElement('tr')
+                let keys = [
+                    `<input id="prop" type="text" class="form-control"style="height: 40px;" value="${value_array[i]}">`,
+                    `
+                    <input id="fill-color" type="color" name="fill-color" class="form-control"
+                        style="height: 40px;" value="#6B70FF">`,
+                    `<input id="line-color" type="color" name="line-color" class="form-control"
+                        style="height: 40px;" value="#333AFF">`,
+                    `<input id="weight" type="number" name="weight" class="form-control" value=2>`,
+                    `<input id="opacity" type="number" name="opacity" class="form-control" value=1>`,
+                    `<input id="fill-opacity" type="number" name="fill-opacity" class="form-control"
+                        value=0.5>`
+                ]
+                for (let j = 0; j < keys.length; j++) {
+                    let col = document.createElement('td')
+                    col.innerHTML = keys[j]
+
+                    row.appendChild(col)
+                }
+                table.appendChild(row)
+            }
+        }
+
+        let location_table = document.getElementById('table-responsive')
+        location_table.appendChild(table)
+
+        function kategoriStyle(value) {
+            let head = document.querySelectorAll('table thead ')
+        }
+
+        function getTableValue(table) {
+
+            let obj2 = []
+            for (let i = 1; i < table.rows.length; i++) {
+                let row = table.rows[i]
+
+                let head = []
+                let obj = {}
+                //iterate through rows
+                //rows would be accessed using the "row" variable assigned in the for loop
+                for (let j = 0; j < row.cells.length; j++) {
+                    head.push(table.rows[0].cells[j].innerHTML)
+                    let col = row.cells[j].querySelector('input').value
+
+                    obj[head[j]] = col
+                    //iterate through columns
+                    //columns would be accessed using the "col" variable assigned in the for loop
+                }
+
+                obj2.push(obj)
+            }
+            let group = obj2.reduce((r, a) => {
+                r[a.kategori] = [...r[a.kategori] || [], a];
+                return r;
+            }, {});
+
+            // Delet prop
+            let del = Object.keys(group).map((a, b) => {
+                let empty_object = {}
+                let ori_object = group[a][0]
+
+                empty_object[a] = ori_object
+
+                delete ori_object.kategori
+                return empty_object
+            })
+
+            return del
+        }
+
+        async function insertKategoriStyle() {
+            let table = await document.getElementById('tbodyid')
+            let data = await getTableValue(table)
+            let final_obj = await transFormObject(data)
+
+            $.ajax({
+                url: '/action/admin/detailstyle/<%= id_layer %>',
+                method: 'POST',
+                data: {
+                    kat: 'kagetori',
+                    val: JSON.stringify(final_obj)
+                },
+                success: function (res) {
+                    alert(res)
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+        }
+
+        async function insertStyle() {
+            let input = await document.querySelectorAll('#single-style-prop input')
+            let default_prop = ['fillColor', 'color', 'weight', 'opacity', 'fillOpacity']
+
+            let final_obj = await getSingleStyle(default_prop,input)
+
+            $.ajax({
+                url: '/action/admin/detailstyle/<%= id_layer %>',
+                method: 'POST',
+                data: {
+                    kat: 'single',
+                    val: JSON.stringify(final_obj)
+                },
+                success: function (res) {
+                    alert(res)
+                },
+                error: function (res) {
+                    alert(res)
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
